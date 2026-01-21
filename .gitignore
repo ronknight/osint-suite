@@ -23,7 +23,6 @@ results/
 blackbird/logs/
 
 # Sherlock
-# Sherlock outputs [username].txt. We ignore txt but keep requirements.
 *.txt
 !requirements.txt
 !LICENSE
@@ -35,8 +34,6 @@ blackbird/logs/
 !**/subbrute/*.txt
 
 # Photon
-# Photon creates a folder for each domain.
-# We ignore common report files in the root or unpredictable folders.
 *.csv
 *.json
 !package.json
@@ -46,7 +43,6 @@ blackbird/logs/
 !**/config/*.json
 
 # Sublist3r
-# Common output filename
 subdomains.txt
 
 # PhoneInfoga
@@ -73,3 +69,14 @@ reports/
 *.docx
 *.ppt
 *.pptx
+
+# Amass
+amass.json
+amass_output/
+
+# Recon-ng
+.recon-ng/
+workspaces/
+
+# Waybackurls
+wayback-data/

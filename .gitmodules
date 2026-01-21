@@ -34,3 +34,18 @@
 [submodule "metagoofil"]
 	path = metagoofil
 	url = https://github.com/laramies/metagoofil.git
+[submodule "amass"]
+	path = amass
+	url = https://github.com/owasp-amass/amass.git
+[submodule "recon-ng"]
+	path = recon-ng
+	url = https://github.com/lanmaster53/recon-ng.git
+[submodule "waybackurls"]
+	path = waybackurls
+	url = https://github.com/tomnomnom/waybackurls.git
+[submodule "whatsmyname"]
+	path = whatsmyname
+	url = https://github.com/WebBreacher/WhatsMyName.git
+[submodule "socialscan"]
+	path = socialscan
+	url = https://github.com/iojw/socialscan.git
