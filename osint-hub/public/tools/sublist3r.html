@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sublist3r // OSINT HUB</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="tool-container">
+        <a href="/" class="back-link">← BACK_TO_DASHBOARD</a>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+            <pre style="color: #ff00ff; font-size: 0.6rem; line-height: 1.1; font-weight: bold; filter: drop-shadow(0 0 8px rgba(255, 0, 255, 0.4)); animation: flicker 3s infinite;">
+                 ____        _     _ _     _   _____
+                / ___| _   _| |__ | (_)___| |_|___ / _ __
+                \___ \| | | | '_ \| | / __| __| |_ \| '__|
+                 ___) | |_| | |_) | | \__ \ |_ ___) | |
+                |____/ \__,_|_.__/|_|_|___/\__|____/|_|
+            </pre>
+        </div>
+        <p style="color: #666; margin-bottom: 2rem; text-align: center; letter-spacing: 10px;">SUBDOMAIN_ENUMERATOR</p>
+
+        <form>
+            <div class="input-group">
+                <input type="text" name="arg" placeholder="Enter Target Domain (e.g. example.com)" class="input-field" required>
+                <button type="submit" class="btn-primary" style="border-color: #ff00ff; color: #ff00ff; background: rgba(255, 0, 255, 0.1);">ENUMERATE</button>
+            </div>
+        </form>
+
+        <div id="output" class="terminal-window" style="color: #ffb6ff;">
+            Waiting for target input...
+        </div>
+    </div>
+    <script src="/js/layout.js"></script>
+    <script>initTool('sublist3r', 'output');</script>
+</body>
+</html>

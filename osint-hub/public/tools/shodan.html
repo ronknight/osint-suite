@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shodan // OSINT HUB</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="tool-container">
+        <a href="/" class="back-link">← BACK_TO_DASHBOARD</a>
+        
+        <h1 style="color: red; text-shadow: 0 0 5px red; font-size: 3rem; margin-bottom: 0.5rem;">SHODAN</h1>
+        <p style="color: #666; margin-bottom: 2rem;">DEVICE_INTELLIGENCE_API</p>
+
+        <form id="shodan-form">
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <input type="text" id="shodan-key" placeholder="API Key" class="input-field">
+                <div class="input-group">
+                    <input type="text" id="shodan-ip" placeholder="Enter Target IP" class="input-field" required>
+                    <button type="submit" class="btn-primary" style="border-color: red; color: red; background: rgba(255, 0, 0, 0.1);">SCAN_HOST</button>
+                </div>
+            </div>
+        </form>
+
+        <div id="output" class="terminal-window" style="color: #ffcccb;">
+            Waiting for input...
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('shodan-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const key = document.getElementById('shodan-key').value;
+            const ip = document.getElementById('shodan-ip').value;
+            const output = document.getElementById('output');
+
+            if(!key) { output.textContent = "Error: API Key Required"; return; }
+
+            output.innerHTML = "Querying Shodan...\n";
+            
+            try {
+                const res = await fetch(`/api/shodan?ip=${ip}&key=${key}`);
+                const data = await res.json();
+                
+                if (data.error) {
+                    output.textContent = `Error: ${data.error}`;
+                } else {
+                    const info = [
+                        `IP: ${data.ip_str}`,
+                        `Organization: ${data.org || 'N/A'}`,
+                        `OS: ${data.os || 'N/A'}`,
+                        `Ports: ${data.ports ? data.ports.join(', ') : 'None'}`,
+                        `Location: ${data.city}, ${data.country_name}`,
+                        `Last Update: ${data.last_update}`
+                    ].join('\n');
+                    output.textContent = `[+] Host Found:\n\n${info}`;
+                }
+            } catch (err) {
+                output.textContent = `Network Error: ${err.message}`;
+            }
+        });
+    </script>
+</body>
+</html>

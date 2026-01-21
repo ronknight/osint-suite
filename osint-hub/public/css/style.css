@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root {
+    --bg-color: #050505;
+    --card-bg: #0a0a0a;
+    --text-color: #e5e5e5;
+    --neon-green: #00ff41;
+    --neon-red: #ff003c;
+    --neon-blue: #00f3ff;
+    --neon-purple: #bd00ff;
+    --neon-yellow: #fcee0a;
+    --border-color: #333;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'JetBrains Mono', monospace;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Utilities */
+.neon-text-green { text-shadow: 0 0 5px var(--neon-green); color: var(--neon-green); }
+.neon-text-blue { text-shadow: 0 0 5px var(--neon-blue); color: var(--neon-blue); }
+.neon-text-red { text-shadow: 0 0 5px var(--neon-red); color: var(--neon-red); }
+.neon-text-purple { text-shadow: 0 0 5px var(--neon-purple); color: var(--neon-purple); }
+.neon-text-yellow { text-shadow: 0 0 5px var(--neon-yellow); color: var(--neon-yellow); }
+
+.border-neon-green { border-color: var(--neon-green); box-shadow: 0 0 5px var(--neon-green); }
+
+/* ASCII Banner */
+.ascii-banner {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.6rem;
+    line-height: 1.2;
+    display: inline-block;
+    text-align: left;
+    margin: 0 auto;
+    filter: drop-shadow(0 0 10px rgba(0, 255, 65, 0.5));
+    animation: flicker 2s infinite;
+    white-space: pre;
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+@media (min-width: 768px) {
+    .ascii-banner { font-size: 0.8rem; }
+}
+
+@media (min-width: 1024px) {
+    .ascii-banner { font-size: 1rem; }
+}
+
+@keyframes flicker {
+    0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% { opacity: 0.99; }
+    20%, 21.999%, 63%, 63.999%, 65%, 69.999% { opacity: 0.4; }
+}
+
+/* Glitch Effect for Titles */
+.glitch {
+    position: relative;
+    color: white;
+    font-size: 4rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.glitch::before, .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+}
+
+.glitch::before {
+    left: 2px;
+    text-shadow: -1px 0 red;
+    clip: rect(24px, 550px, 90px, 0);
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+    left: -2px;
+    text-shadow: -1px 0 blue;
+    clip: rect(85px, 550px, 140px, 0);
+    animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+    0% { clip: rect(10px, 9999px, 30px, 0); }
+    20% { clip: rect(80px, 9999px, 100px, 0); }
+    40% { clip: rect(10px, 9999px, 80px, 0); }
+    60% { clip: rect(90px, 9999px, 10px, 0); }
+    80% { clip: rect(40px, 9999px, 140px, 0); }
+    100% { clip: rect(130px, 9999px, 30px, 0); }
+}
+
+@keyframes glitch-anim-2 {
+    0% { clip: rect(100px, 9999px, 10px, 0); }
+    20% { clip: rect(20px, 9999px, 130px, 0); }
+    40% { clip: rect(80px, 9999px, 50px, 0); }
+    60% { clip: rect(10px, 9999px, 120px, 0); }
+    80% { clip: rect(120px, 9999px, 20px, 0); }
+    100% { clip: rect(50px, 9999px, 90px, 0); }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #111; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #555; }
+
+/* Grid */
+.tool-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.tool-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+}
+
+.tool-card:hover {
+    border-color: var(--neon-green);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px -10px rgba(0, 255, 65, 0.2);
+}
+
+.tool-card h3 { margin: 0 0 0.5rem 0; font-size: 1.5rem; }
+.tool-card p { color: #888; font-size: 0.9rem; line-height: 1.5; }
+.tool-card .tag { 
+    position: absolute; top: 1rem; right: 1rem; 
+    font-size: 0.7rem; padding: 0.2rem 0.5rem; 
+    border-radius: 4px; border: 1px solid #333; 
+    text-transform: uppercase;
+}
+
+/* Tool Page Specifics */
+.tool-container {
+    max-width: 95%;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.terminal-window {
+    background: #0d1117;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    height: 500px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+    margin-top: 1rem;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+.input-field {
+    flex: 1;
+    background: #000;
+    border: 1px solid #333;
+    color: white;
+    padding: 0.8rem;
+    font-family: inherit;
+    border-radius: 4px;
+}
+
+.input-field:focus { outline: none; border-color: var(--neon-green); }
+
+.btn-primary {
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid var(--neon-green);
+    color: var(--neon-green);
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.btn-primary:hover { background: rgba(0, 255, 65, 0.2); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Back Button */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #666;
+    text-decoration: none;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+}
+.back-link:hover { color: white; }
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .glitch { font-size: 2.5rem; }
+    
+    .tool-grid {
+        grid-template-columns: 1fr; /* Full width cards */
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .tool-container {
+        padding: 1rem;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .ascii-banner {
+        font-size: 0.35rem; /* Tiny text for banners */
+        overflow-x: auto;
+        display: block;
+        width: 100%;
+    }
+
+    .input-group {
+        flex-direction: column;
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 1rem; /* Larger touch target */
+    }
+
+    .terminal-window {
+        font-size: 0.75rem;
+        height: 400px;
+    }
+}

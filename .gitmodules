@@ -1,0 +1,18 @@
+[submodule "blackbird"]
+	path = blackbird
+	url = https://github.com/p1ngul1n0/blackbird.git
+[submodule "Photon"]
+	path = Photon
+	url = https://github.com/s0md3v/Photon.git
+[submodule "sherlock"]
+	path = sherlock
+	url = https://github.com/sherlock-project/sherlock.git
+[submodule "phoneinfoga"]
+	path = phoneinfoga
+	url = https://github.com/sundowndev/phoneinfoga.git
+[submodule "spiderfoot"]
+	path = spiderfoot
+	url = https://github.com/smicallef/spiderfoot.git
+[submodule "Sublist3r"]
+	path = Sublist3r
+	url = https://github.com/aboul3la/Sublist3r.git

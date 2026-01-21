@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheHarvester // OSINT HUB</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="tool-container">
+        <a href="/" class="back-link">← BACK_TO_DASHBOARD</a>
+        
+        <h1 class="neon-text-green" style="font-size: 3rem; margin-bottom: 0.5rem;">THE_HARVESTER</h1>
+        <p style="color: #666; margin-bottom: 2rem;">DOMAIN_RECON_SUITE</p>
+
+        <form>
+            <div class="input-group">
+                <input type="text" name="arg" placeholder="Enter Target Domain (e.g. example.com)" class="input-field" required>
+                <button type="submit" class="btn-primary">HARVEST_DATA</button>
+            </div>
+        </form>
+
+        <div id="output" class="terminal-window" style="color: #90ee90;">
+            Waiting for target input...
+        </div>
+    </div>
+    <script src="/js/layout.js"></script>
+    <script>initTool('theHarvester', 'output');</script>
+</body>
+</html>

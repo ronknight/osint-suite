@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holehe // OSINT HUB</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="tool-container">
+        <a href="/" class="back-link">← BACK_TO_DASHBOARD</a>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+            <pre class="neon-text-purple" style="font-size: 0.8rem; line-height: 1.1; font-weight: bold; filter: drop-shadow(0 0 8px rgba(189, 0, 255, 0.4)); animation: flicker 3s infinite;">
+  _           _      _
+ | |__   ___ | | ___| |__   ___
+ | '_ \ / _ \| |/ _ \ '_ \ / _ \
+ | | | | (_) | |  __/ | | |  __/
+ |_| |_|\___/|_|\___|_| |_|\___|
+            </pre>
+        </div>
+        <p style="color: #666; margin-bottom: 2rem; text-align: center; letter-spacing: 10px;">EMAIL_OSINT_CHECKER</p>
+
+        <form>
+            <div class="input-group">
+                <input type="email" name="arg" placeholder="Enter Target Email" class="input-field" required>
+                <button type="submit" class="btn-primary" style="border-color: var(--neon-purple); color: var(--neon-purple); background: rgba(189, 0, 255, 0.1);">CHECK_ACCOUNTS</button>
+            </div>
+        </form>
+
+        <div id="output" class="terminal-window" style="color: #e0aaff;">
+            Waiting for target input...
+        </div>
+    </div>
+    <script src="/js/layout.js"></script>
+    <script>initTool('holehe', 'output');</script>
+</body>
+</html>

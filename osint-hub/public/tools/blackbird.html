@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackbird // OSINT HUB</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="tool-container">
+        <a href="/" class="back-link">← BACK_TO_DASHBOARD</a>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+            <pre class="neon-text-red" style="font-size: 0.7rem; line-height: 1.1; font-weight: bold; filter: drop-shadow(0 0 8px rgba(255, 0, 60, 0.4)); animation: flicker 3s infinite;">
+  ____  _            _    _     _
+ |  _ \| |          | |  | |   (_)
+ | |_) | | __ _  ___| | _| |__  _ _ __ __|
+ |  _ &lt;| |/ _` |/ __| |/ / '_ \| | '__/ _` |
+ | |_) | | (_| | (__|   &lt;| |_) | | | | (_| |
+ |____/|_|\__,_|\___|_|\_\_.__/|_|_|  \__,_|
+            </pre>
+        </div>
+        <p style="color: #666; margin-bottom: 2rem; text-align: center; letter-spacing: 10px;">USERNAME_HUNT_PROTOCOL_V2</p>
+
+        <form>
+            <div class="input-group">
+                <input type="text" name="arg" placeholder="Enter Target Username" class="input-field" required>
+                <button type="submit" class="btn-primary" style="border-color: var(--neon-red); color: var(--neon-red); background: rgba(255, 0, 60, 0.1);">FLY</button>
+            </div>
+        </form>
+
+        <div id="output" class="terminal-window" style="color: #ff6b6b;">
+            Waiting for target input...
+        </div>
+    </div>
+    <script src="/js/layout.js"></script>
+    <script>initTool('blackbird', 'output');</script>
+</body>
+</html>

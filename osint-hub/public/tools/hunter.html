@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hunter.io // OSINT HUB</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="tool-container">
+        <a href="/" class="back-link">← BACK_TO_DASHBOARD</a>
+        
+        <h1 style="color: orange; text-shadow: 0 0 5px orange; font-size: 3rem; margin-bottom: 0.5rem;">HUNTER.IO</h1>
+        <p style="color: #666; margin-bottom: 2rem;">EMAIL_VERIFICATION_API</p>
+
+        <form id="hunter-form">
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <input type="text" id="hunter-key" placeholder="API Key" class="input-field">
+                <div class="input-group">
+                    <input type="text" id="hunter-domain" placeholder="Enter Target Domain" class="input-field" required>
+                    <button type="submit" class="btn-primary" style="border-color: orange; color: orange; background: rgba(255, 165, 0, 0.1);">SEARCH_EMAILS</button>
+                </div>
+            </div>
+        </form>
+
+        <div id="output" class="terminal-window" style="color: #ffd8a8;">
+            Waiting for input...
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('hunter-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const key = document.getElementById('hunter-key').value;
+            const domain = document.getElementById('hunter-domain').value;
+            const output = document.getElementById('output');
+
+            if(!key) { output.textContent = "Error: API Key Required"; return; }
+
+            output.innerHTML = "Searching Hunter.io database...\n";
+            
+            try {
+                const res = await fetch(`/api/hunter?domain=${domain}&key=${key}`);
+                const data = await res.json();
+                
+                if (data.data) {
+                    const emails = data.data.emails.map(e => `[+] ${e.value} (${e.type})`).join('\n');
+                    output.textContent = `Found ${data.data.emails.length} emails for ${domain}:\n\n${emails}`;
+                } else {
+                    output.textContent = `Error: ${JSON.stringify(data.errors || data, null, 2)}`;
+                }
+            } catch (err) {
+                output.textContent = `Network Error: ${err.message}`;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSINT HUB // DASHBOARD</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <div style="text-align: center; padding: 2rem 1rem 0 1rem; overflow: hidden;">
+        <pre class="ascii-banner neon-text-green">
+ ██████╗ ███████╗██╗███╗   ██╗████████╗    ██╗  ██╗██╗   ██╗██████╗ 
+██╔═══██╗██╔════╝██║████╗  ██║╚══██╔══╝    ██║  ██║██║   ██║██╔══██╗
+██║   ██║███████╗██║██╔██╗ ██║   ██║       ███████║██║   ██║██████╔╝
+██║   ██║╚════██║██║██║╚██╗██║   ██║       ██╔══██║██║   ██║██╔══██╗
+╚██████╔╝███████║██║██║ ╚████║   ██║       ██║  ██║╚██████╔╝██████╔╝
+ ╚═════╝ ╚══════╝╚═╝╚═╝  ╚═══╝   ╚═╝       ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ 
+        </pre>
+        <p class="neon-text-blue" style="letter-spacing: 5px; font-size: 0.8rem; margin-top: -10px; font-weight: bold;">[!] SYSTEM_STATUS: OPERATIONAL_LEVEL_3</p>
+    </div>
+
+    <div style="text-align: center; padding: 1rem 1rem 4rem 1rem;">
+        <h1 class="glitch" data-text="OSINT_HUB">OSINT_HUB</h1>
+    </div>
+
+    <div class="tool-grid">
+        <!-- SpiderFoot -->
+        <a href="#" onclick="toggleService('spiderfoot')" class="tool-card" style="border-color: #333;">
+            <div class="tag" style="color: var(--neon-green)">SERVICE</div>
+            <h3 style="color: var(--neon-green)">SpiderFoot</h3>
+            <p>Automated OSINT collection. Scans 100+ public data sources to gather intelligence on IP addresses, domain names, e-mail addresses, and names.</p>
+            <div id="status-spiderfoot" style="margin-top: 1rem; font-size: 0.8rem; color: #555;">STATUS: STOPPED</div>
+        </a>
+
+        <!-- PhoneInfoga -->
+        <a href="#" onclick="toggleService('phoneinfoga')" class="tool-card">
+            <div class="tag" style="color: var(--neon-green)">SERVICE</div>
+            <h3 style="color: var(--neon-green)">PhoneInfoga</h3>
+            <p>Advanced information gathering framework for phone numbers. precise geolocation, carrier info, and social accounts.</p>
+            <div id="status-phoneinfoga" style="margin-top: 1rem; font-size: 0.8rem; color: #555;">STATUS: STOPPED</div>
+        </a>
+
+        <!-- Sherlock -->
+        <a href="/tools/sherlock.html" class="tool-card">
+            <div class="tag" style="color: var(--neon-blue)">CLI</div>
+            <h3 style="color: var(--neon-blue)">Sherlock</h3>
+            <p>Hunt down social media accounts by username across social networks. Ideal for initial username reconnaissance.</p>
+        </a>
+
+        <!-- Blackbird -->
+        <a href="/tools/blackbird.html" class="tool-card">
+            <div class="tag" style="color: var(--neon-red)">CLI</div>
+            <h3 style="color: var(--neon-red)">Blackbird</h3>
+            <p>A modern, fast, and powerful username enumeration tool. Checks for username availability across high-traffic sites.</p>
+        </a>
+
+        <!-- Holehe -->
+        <a href="/tools/holehe.html" class="tool-card">
+            <div class="tag" style="color: var(--neon-purple)">CLI</div>
+            <h3 style="color: var(--neon-purple)">Holehe</h3>
+            <p>Checks if an email is attached to an account on sites like Twitter, Instagram, Imgur and more than 120 others.</p>
+        </a>
+
+        <!-- Photon -->
+        <a href="/tools/photon.html" class="tool-card">
+            <div class="tag" style="color: var(--neon-yellow)">CLI</div>
+            <h3 style="color: var(--neon-yellow)">Photon</h3>
+            <p>Incredibly fast crawler designed for OSINT. Extracts URLs, emails, files, website accounts and much more.</p>
+        </a>
+
+        <!-- TheHarvester -->
+        <a href="/tools/theharvester.html" class="tool-card">
+            <div class="tag" style="color: var(--neon-green)">CLI</div>
+            <h3 style="color: var(--neon-green)">TheHarvester</h3>
+            <p>E-mail, subdomain and people names harvester. Uses Google, Bing, PGP key servers, LinkedIn and other sources.</p>
+        </a>
+
+        <!-- Sublist3r -->
+        <a href="/tools/sublist3r.html" class="tool-card">
+            <div class="tag" style="color: #ff00ff">CLI</div>
+            <h3 style="color: #ff00ff">Sublist3r</h3>
+            <p>Fast subdomains enumeration tool. Useful for penetration testers and bug hunters to map the attack surface.</p>
+        </a>
+
+        <!-- Hunter.io -->
+        <a href="/tools/hunter.html" class="tool-card">
+            <div class="tag" style="color: orange">API</div>
+            <h3 style="color: orange">Hunter.io</h3>
+            <p>Connect to the Hunter.io API to find professional email addresses associated with a domain name.</p>
+        </a>
+
+        <!-- Shodan -->
+        <a href="/tools/shodan.html" class="tool-card">
+            <div class="tag" style="color: red">API</div>
+            <h3 style="color: red">Shodan</h3>
+            <p>Search engine for Internet-connected devices. Discover which devices are connected to the Internet, where they are located, and who uses them.</p>
+        </a>
+    </div>
+
+    <script>
+        // Simple Service Toggle Logic for Dashboard
+        async function fetchStatus() {
+            try {
+                const res = await fetch('/api/status');
+                const services = await res.json();
+                
+                services.forEach(s => {
+                    const el = document.getElementById(`status-${s.id}`);
+                    if(el) {
+                        const isRunning = s.status === 'running';
+                        el.innerHTML = isRunning 
+                            ? `<span style="color: var(--neon-green)">STATUS: RUNNING</span> <span style="color: #666">|</span> <a href="${s.url}" target="_blank" style="color: white; text-decoration: underline;">OPEN UI</a>`
+                            : `STATUS: STOPPED <span style="color: #666; font-size: 0.7rem">(Click card to start)</span>`;
+                    }
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        async function toggleService(id) {
+            const el = document.getElementById(`status-${id}`);
+            const isRunning = el.innerText.includes('RUNNING');
+            const action = isRunning ? 'stop' : 'start';
+            
+            el.innerText = 'STATUS: WORKING...';
+            
+            await fetch('/api/control', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id, action })
+            });
+            setTimeout(fetchStatus, 1000);
+        }
+
+        fetchStatus();
+        setInterval(fetchStatus, 5000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+**/node_modules/
+.DS_Store
+.env
+start.sh
+stop.sh
+
+# --- OSINT Tool Outputs & Intermediate Files ---
+
+# General Logs & Databases
+*.log
+*.sqlite
+*.db
+*.pyc
+__pycache__/
+
+# SpiderFoot
+sf.log
+sf_debug.log
+spiderfoot.db
+
+# Blackbird
+results/
+blackbird/logs/
+
+# Sherlock
+# Sherlock outputs [username].txt. We ignore txt but keep requirements.
+*.txt
+!requirements.txt
+!LICENSE
+!NOTICE.txt
+!README.md
+!**/data/*.txt
+!**/assets/*.txt
+!**/core/*.txt
+!**/subbrute/*.txt
+
+# Photon
+# Photon creates a folder for each domain.
+# We ignore common report files in the root or unpredictable folders.
+*.csv
+*.json
+!package.json
+!package-lock.json
+!**/data/*.json
+!**/assets/*.json
+!**/config/*.json
+
+# Sublist3r
+# Common output filename
+subdomains.txt
+
+# PhoneInfoga
+phoneinfoga.db
+
+# OSINT Hub
+osint-hub/server.log
