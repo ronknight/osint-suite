@@ -54,3 +54,22 @@ phoneinfoga.db
 
 # OSINT Hub
 osint-hub/server.log
+
+# theHarvester
+*.xml
+
+# GHunt
+resources/
+!ghunt/resources/
+
+# Maigret
+reports/
+
+# Metagoofil
+*.pdf
+*.doc
+*.xls
+*.xlsx
+*.docx
+*.ppt
+*.pptx

@@ -16,3 +16,21 @@
 [submodule "Sublist3r"]
 	path = Sublist3r
 	url = https://github.com/aboul3la/Sublist3r.git
+[submodule "theHarvester"]
+	path = theHarvester
+	url = https://github.com/laramies/theHarvester.git
+[submodule "holehe"]
+	path = holehe
+	url = https://github.com/megadose/holehe.git
+[submodule "maigret"]
+	path = maigret
+	url = https://github.com/soxoj/maigret.git
+[submodule "ghunt"]
+	path = ghunt
+	url = https://github.com/mxrch/ghunt.git
+[submodule "dnsrecon"]
+	path = dnsrecon
+	url = https://github.com/darkoperator/dnsrecon.git
+[submodule "metagoofil"]
+	path = metagoofil
+	url = https://github.com/laramies/metagoofil.git
