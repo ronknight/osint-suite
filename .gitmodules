@@ -49,3 +49,15 @@
 [submodule "socialscan"]
 	path = socialscan
 	url = https://github.com/iojw/socialscan.git
+[submodule "nikto"]
+	path = nikto
+	url = https://github.com/sullo/nikto.git
+[submodule "sqlmap"]
+	path = sqlmap
+	url = https://github.com/sqlmapproject/sqlmap.git
+[submodule "shodan-python"]
+	path = shodan-python
+	url = https://github.com/achillean/shodan-python.git
+[submodule "wafw00f"]
+	path = wafw00f
+	url = https://github.com/EnableSecurity/wafw00f.git
