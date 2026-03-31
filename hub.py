@@ -123,6 +123,12 @@ TOOLS = {
         "dir": "wafw00f",
         "cmd": "python3 -m wafw00f.main",
         "desc": "Identify and fingerprint Web Application Firewalls."
+    },
+    "19": {
+        "name": "SilverInstaEye",
+        "dir": "SilverInstaEye",
+        "cmd": "python3 silverinstaeye.py",
+        "desc": "Comprehensive OSINT tool for Instagram."
     }
 }
 

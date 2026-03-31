@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSINT Geolocator // PRO-EDITION</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .method-toggle { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+        .method-btn { flex: 1; padding: 0.8rem; background: rgba(255, 255, 255, 0.05); border: 1px solid #333; color: #666; cursor: pointer; transition: all 0.2s; font-size: 0.7rem; text-transform: uppercase; min-width: 120px; }
+        .method-btn.active { border-color: cyan; color: cyan; background: rgba(0, 255, 255, 0.1); }
+        .key-input { display: none; margin-bottom: 1rem; }
+        .key-input.visible { display: block; }
+        .api-link { color: cyan; text-decoration: underline; font-size: 0.7rem; }
+        .result-tag { display: inline-block; padding: 0.2rem 0.5rem; background: #222; border-radius: 4px; font-size: 0.7rem; margin-right: 0.5rem; }
+    </style>
+</head>
+<body>
+    <div class="tool-container">
+        <a href="/" class="back-link">← BACK_TO_DASHBOARD</a>
+        
+        <h1 style="color: cyan; text-shadow: 0 0 5px cyan; font-size: 3rem; margin-bottom: 0.5rem;">GEOLOCATOR</h1>
+        <p style="color: #666; margin-bottom: 2rem;">MULTI_API_IMAGE_INTELLIGENCE</p>
+
+        <form id="geolocate-form">
+            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <div class="method-toggle">
+                    <button type="button" class="method-btn active" id="method-auto" onclick="setMethod('auto')">Auto (Free First)</button>
+                    <button type="button" class="method-btn" id="method-ai" onclick="setMethod('ai')">GeoSpy AI</button>
+                    <button type="button" class="method-btn" id="method-hf" onclick="setMethod('hf')">StreetCLIP (HF)</button>
+                </div>
+
+                <div id="geospy-section" class="key-input">
+                    <input type="text" id="geospy-key" placeholder="GeoSpy API Key (20/mo Free)" class="input-field">
+                    <a href="https://geospy.ai" target="_blank" class="api-link">Get Free Key at GeoSpy.ai</a>
+                </div>
+
+                <div id="hf-section" class="key-input">
+                    <input type="text" id="hf-token" placeholder="Hugging Face Token (Free/Unlimited)" class="input-field">
+                    <a href="https://huggingface.co/settings/tokens" target="_blank" class="api-link">Get Free Token at HuggingFace.co</a>
+                </div>
+
+                <div class="input-group">
+                    <input type="file" id="image-upload" accept="image/*" class="input-field" required>
+                    <button type="submit" class="btn-primary" style="border-color: cyan; color: cyan; background: rgba(0, 255, 255, 0.1);">RUN_ANALYSIS</button>
+                </div>
+            </div>
+        </form>
+
+        <div id="output" class="terminal-window" style="color: #e0ffff; font-family: monospace; white-space: pre-wrap;">
+            [SYSTEM READY] - Awaiting target image...
+        </div>
+    </div>
+    
+    <script>
+        let currentMethod = 'auto';
+
+        function setMethod(method) {
+            currentMethod = method;
+            document.querySelectorAll('.method-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`method-${method}`).classList.add('active');
+            
+            document.getElementById('geospy-section').classList.toggle('visible', method === 'ai');
+            document.getElementById('hf-section').classList.toggle('visible', method === 'hf');
+        }
+
+        document.getElementById('geolocate-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const imageInput = document.getElementById('image-upload');
+            const output = document.getElementById('output');
+
+            output.innerHTML = `<span style="color: cyan">[#] INITIALIZING MULTI-STAGE SCAN...</span>\n`;
+            output.innerHTML += `[#] MODE: ${currentMethod.toUpperCase()}\n`;
+            
+            const formData = new FormData();
+            formData.append('image', imageInput.files[0]);
+            formData.append('method', currentMethod);
+            
+            const geospyKey = document.getElementById('geospy-key').value;
+            const hfToken = document.getElementById('hf-token').value;
+            
+            if(geospyKey) formData.append('apiKey', geospyKey);
+            if(hfToken) formData.append('hfToken', hfToken);
+            
+            try {
+                const res = await fetch(`/api/geolocate`, { method: 'POST', body: formData });
+                const data = await res.json();
+                
+                if (data.error) {
+                    output.innerHTML += `<span style="color: #ff4444">[!] ERROR: ${data.error}</span>`;
+                } else {
+                    let info = `\n<span style="color: #00ff00">[+] RECONNAISSANCE SUCCESSFUL</span>\n\n`;
+                    
+                    if (data.gps) {
+                        info += `<span style="color: cyan; font-weight: bold;">[!] FOUND COORDINATES</span>\n`;
+                        info += `LAT:  ${data.gps.lat}\n`;
+                        info += `LON:  ${data.gps.lon}\n`;
+                        if (data.gps.address) info += `LOC:  ${data.gps.address}\n`;
+                        info += `\n<span style="color: #00ff00">MAPS:</span> <a href="https://www.google.com/maps?q=${data.gps.lat},${data.gps.lon}" target="_blank" style="color: white; text-decoration: underline;">Open Google Maps</a>\n\n`;
+                    }
+
+                    if (data.exif) info += `<span class="result-tag">SOURCE: EXIF_METADATA</span>\n`;
+                    if (data.ai) info += `<span class="result-tag">SOURCE: GEOSPY_PIXEL_ANALYSIS</span>\n`;
+                    
+                    if (data.hf) {
+                        info += `\n<span style="color: cyan; font-weight: bold;">[!] HUGGING FACE INFERENCE (StreetCLIP)</span>\n`;
+                        data.hf.slice(0, 5).forEach(p => {
+                            info += `${(p.score * 100).toFixed(1)}% confidence: ${p.label}\n`;
+                        });
+                    }
+
+                    if (data.aiError) info += `\n<span style="color: #ff8800">[!] AI_WARNING: ${data.aiError}</span>\n`;
+
+                    output.innerHTML += info;
+                }
+            } catch (err) {
+                output.innerHTML += `<span style="color: #ff4444">[!] NETWORK_FAILURE: ${err.message}</span>`;
+            }
+        });
+    </script>
+</body>
+</html>

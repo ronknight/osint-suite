@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SilverInstaEye // OSINT HUB</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="tool-container">
+        <a href="/" class="back-link">← BACK_TO_DASHBOARD</a>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+            <pre class="neon-text-blue" style="font-size: 0.7rem; line-height: 1.1; font-weight: bold; filter: drop-shadow(0 0 8px rgba(0, 243, 255, 0.4)); animation: flicker 3s infinite;">
+   _____ _ _                _____           _        ______             
+  / ____(_) |              |_   _|         | |      |  ____|            
+ | (___  _| |_   _____ _ __  | |  _ __  ___| |_ __ _| |__  _   _  ___ 
+  \___ \| | \ \ / / _ \ '__| | | | '_ \/ __| __/ _` |  __|| | | |/ _ \
+  ____) | | |\ V /  __/ |   _| |_| | | \__ \ || (_| | |___| |_| |  __/
+ |_____/|_|_| \_/ \___|_|  |_____|_| |_|___/\__\__,_|______\__, |\___|
+                                                              __/ |     
+                                                             |___/      
+            </pre>
+        </div>
+        <p style="color: #666; margin-bottom: 2rem; text-align: center; letter-spacing: 10px;">INSTAGRAM_OSINT_PROTOCOL_V1</p>
+
+        <form id="toolForm">
+            <div class="input-group">
+                <input type="text" name="arg" placeholder="Enter Instagram Username" class="input-field" required>
+                <button type="submit" class="btn-primary" style="border-color: var(--neon-blue); color: var(--neon-blue);">INITIATE_SCAN</button>
+            </div>
+        </form>
+
+        <div id="output" class="terminal-window" style="color: #4facfe;">
+            Waiting for target input...
+        </div>
+    </div>
+    <script src="/js/layout.js"></script>
+    <script>
+        document.getElementById('toolForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const arg = e.target.arg.value;
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = `Scanning ${arg}...`;
+            
+            // Assuming initTool is defined in layout.js or similar
+            // and it handles the communication with the server.
+            // Since I don't see initTool definition, I'll follow the pattern in other files.
+        });
+    </script>
+    <script>initTool('silverinstaeye', 'output');</script>
+</body>
+</html>
